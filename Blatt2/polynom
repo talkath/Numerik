@@ -1,0 +1,10 @@
+function f=polynom(x, st, a)
+  f=a(1);
+  for i=[1:1:numel(a)]
+    p=1;
+    for j=[1:1:i]
+      p=p.*(x-st(j));
+    endfor
+    f+=a(i)*p;
+  endfor
+endfunction
