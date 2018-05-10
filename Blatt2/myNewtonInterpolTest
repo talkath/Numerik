@@ -1,0 +1,31 @@
+for n=[7 12 17]
+  for(i=1:n+1)
+    ax1(i)=-1+(2*i)/n;
+    ay1(i)=1/(1+25*ax1(i)^2);
+  end
+  for(i=1:n+1)
+    tx1(i)=cos((2*i+1)*pi/(2*n+2));
+    ty1(i)=1/(1+25*tx1(i)^2);
+  end
+  d=length(ax1)
+  f=@(x) 1./(1+25.*x.*x);
+  l=single(-1:0.1:1);
+  y=f(l);
+
+  figure 
+  hold on;
+  plot(l,y, 'g')
+  plot(ax1,ay1, '*r') 
+  plot(tx1,ty1, '*b')
+
+  d=myNewtonInterpol(ax1,ay1);
+  x=single(-1:0.1:1);
+  p=polynom(x, ax1,d);
+  plot(x,p, 'r')
+  ylim([0 5])
+
+  g=myNewtonInterpol(tx1,ty1);
+  s=single(-1:0.1:1);
+  t=polynom(s, tx1, g);
+  plot(s,t,'b')
+end
